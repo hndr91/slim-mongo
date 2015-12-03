@@ -8,13 +8,12 @@ Just clone this repo, and import friends.json to MongoDB collection
 
 ### Structure
 
-slim-mongo
-|---include
-    |---config.php
-    |---dbConnect.php
-    |---dbHandler.php
-|---lib
-    |---Slim
-|---index.php
-|---.htaccess
+|---include <br/>
+    |---config.php</br/>
+    |---dbConnect.php<br/>
+    |---dbHandler.php<br/>
+|---lib<br/>
+    |---Slim<br/>
+|---index.php<br/>
+|---.htaccess<br/>
 
