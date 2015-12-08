@@ -6,7 +6,7 @@ Slim\Slim::registerAutoloader();
 
 $app = new Slim\Slim();
 
-//Get All friends
+//Get All friends end point
 $app->get('/friends', function() {
   $db = new dbHandler();
   $cur = $db->getAllFriends();
@@ -25,6 +25,50 @@ $app->get('/friends', function() {
   //show result
   response(200, $result);
 });
+
+//Post Friends end point
+$app->post('/friends', function() use($app){
+  $res = array();
+  $name = $app->request()->post('name');
+  $age = $app->request()->post('age');
+
+  $db = new dbHandler();
+  $cur = $db->insertFriend($name,$age);
+
+  if($cur == INSERT_COL_SUCCESS) {
+    $res["error"] = FALSE;
+    $res["message"] = "Success to insert a new friend";
+    response(201, $res);
+  } else {
+    $res["error"] = TRUE;
+    $res["message"] = "Failed to add a new friend";
+    response(200, $res);
+  }
+});
+
+//Delete friend end point
+/*
+$app->delete('/friends/:name', function($name){
+  $res = array();
+  $db = new dbHandler();
+  echo $name;
+
+
+  $cur = $db->removeFriendByName($name);
+  echo $cur;
+  if($cur == REMOVE_FRIEND_SUCCESS) {
+    $res["error"] = FALSE;
+    $res["message"] = "Success to remove a friend";
+    $res["id"] = $name;
+    response(201, $res);
+  } else {
+    $res["error"] = TRUE;
+    $res["message"] = "Failed to remove a friend";
+    $res["id"] = $name;
+    response(200, $res);
+  }
+});
+*/
 
 //rest response helper
 function response($status, $response) {
